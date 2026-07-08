@@ -4,16 +4,8 @@
 !.gitignore
 !README.md
 
-!.zshrc
-!.zprofile
-
-!.config/
-!.config/ghostty/
-!.config/ghostty/config
-
-!.local/
-!.local/bin/
-!.local/bin/sudo-askpass
+# Shell, ghostty and sudo-askpass moved to ../nixos-config (home-manager). What
+# stays below is only what home-manager can't own (daemon/app-rewritten files).
 
 # Claude Code config: a copy from ~/.claude (settings + user skills only;
 # never deployed back over a live ~/.claude)
