@@ -1,0 +1,23 @@
+# Whitelist, per rgbcu.be/blog/gitignore: ignore everything, re-include by name.
+*
+
+!.gitignore
+!README.md
+
+!.zshrc
+!.zprofile
+
+!.config/
+!.config/ghostty/
+!.config/ghostty/config
+
+# Claude Code config: a copy from ~/.claude (settings + user skills only;
+# never deployed back over a live ~/.claude)
+!.claude/
+!.claude/settings.json
+!.claude/skills/
+!.claude/skills/**
+
+!Library/
+!Library/Preferences/
+!Library/Preferences/com.apple.Terminal.plist
