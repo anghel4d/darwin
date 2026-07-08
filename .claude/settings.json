@@ -1,4 +1,5 @@
 {
+  "model": "opus",
   "worktree": {
     "baseRef": "fresh"
   },
@@ -11,6 +12,5 @@
   "skipWorkflowUsageWarning": true,
   "theme": "auto",
   "inputNeededNotifEnabled": true,
-  "agentPushNotifEnabled": true,
-  "model": "fable"
+  "agentPushNotifEnabled": true
 }
