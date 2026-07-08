@@ -1,8 +1,3 @@
-# brew→nix migration: openjdk now comes from nix-darwin (pkgs.jdk in
-# environment.systemPackages). Guarded so it self-disables once the brew keg
-# is uninstalled by the declarative cleanup; delete after the first switch.
-[ -d /opt/homebrew/opt/openjdk/bin ] && export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
-
 # ls bindings
 alias ls='eza --icons --group-directories-first --time-style=long-iso'
 alias ll='eza -l --icons --git --group-directories-first --time-style=long-iso --group --all'
@@ -33,12 +28,6 @@ PROMPT='%F{blue}$(basename "$(dirname "$PWD")")%f %F{magenta}➤%f %F{green}$(ba
 [ -f "/Users/matei3d/.ghcup/env" ] && . "/Users/matei3d/.ghcup/env" # ghcup-envexport PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 
-# brew→nix migration: LLVM 22 (clang/clang++/lld/lldb) now comes from nix-darwin
-# (llvmPackages_latest in environment.systemPackages), still ahead of Apple clang.
-# Guarded so it self-disables once the brew keg is uninstalled by the declarative
-# cleanup; delete after the first switch.
-[ -d /opt/homebrew/opt/llvm/bin ] && export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
-
 
 # Added by Antigravity CLI installer
 export PATH="/Users/matei3d/.local/bin:$PATH"
@@ -46,6 +35,10 @@ export PATH="/Users/matei3d/.local/bin:$PATH"
 # Vulkan SDK (LunarG): sets VULKAN_SDK + PATH (glslc), loader & layers.
 # VULKAN_SDK is what CMake's find_package(Vulkan) keys off to locate glslc.
 [ -f "$HOME/VulkanSDK/1.4.350.0/setup-env.sh" ] && source "$HOME/VulkanSDK/1.4.350.0/setup-env.sh" >/dev/null 2>&1
+
+# sudo askpass helper: `sudo -A` (or plain sudo from no-TTY contexts like
+# Claude Code) pops a GUI password dialog instead of needing a terminal.
+[ -x "$HOME/.local/bin/sudo-askpass" ] && export SUDO_ASKPASS="$HOME/.local/bin/sudo-askpass"
 
 # Pin git (and only git) to UTC: all commit dates display in UTC, and new commits
 # record a +0000 offset. The rest of the shell keeps the system local zone.
@@ -88,8 +81,3 @@ claude() {
 
   caffeinate -i "$bin" "$@"
 }
-
-# Nix
-if [ -e /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]; then
-  . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
-fi

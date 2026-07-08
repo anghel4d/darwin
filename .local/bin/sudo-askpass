@@ -1,0 +1,7 @@
+#!/bin/sh
+# SUDO_ASKPASS helper: GUI password prompt, so `sudo -A` works from
+# no-TTY contexts (Claude Code, scripts, launchd). Prints the password
+# to stdout for sudo; exits nonzero if the dialog is cancelled.
+exec /usr/bin/osascript \
+	-e 'display dialog "sudo wants your password" default answer "" with hidden answer with title "sudo askpass" with icon caution' \
+	-e 'text returned of result'

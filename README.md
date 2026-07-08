@@ -9,6 +9,8 @@ mechanical move. Being a submodule, it clones and pins independently of dots.
   PATH guards).
 - `.config/ghostty/config` — Ghostty (now installed via nix-darwin's
   `ghostty-bin`, config unchanged).
+- `.local/bin/sudo-askpass` — GUI password prompt for `sudo -A`; exported
+  as `SUDO_ASKPASS` from `.zshrc` so sudo works from no-TTY contexts.
 - `.claude/` — a **copy** of the mac's Claude Code config (settings + user
   skills). The root-level `.claude/` is pylon's; the two are intentionally
   separate. Copies flow **from** `~/.claude` **into** here — never deploy this
